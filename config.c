@@ -1981,7 +1981,7 @@ void setup_config_box(struct controlbox *b, bool midsession,
                           loggingbuttons_handler,
                           I(CONF_logtype),
                           "None", 't', I(LGTYP_NONE),
-                          "Printable output", 'p', I(LGTYP_ASCII),
+                          "Printable output(+UTF-8)", 'p', I(LGTYP_ASCII),
                           "All session output", 'l', I(LGTYP_DEBUG),
                           sshlogname, 's', I(LGTYP_PACKETS),
                           sshrawlogname, 'r', I(LGTYP_SSHRAW));

@@ -3784,6 +3784,12 @@ static void term_out(Terminal *term, bool called_from_term_data)
              */
             if (term->logtype == LGTYP_DEBUG && term->logctx)
                 logtraffic(term->logctx, (unsigned char) c, LGTYP_DEBUG);
+            else if (term->logtype == LGTYP_ASCII && term->logctx) {    // Printable output + UTF=8 (smlee@sk.com)
+                unsigned char uc = (unsigned char)c;
+                if( (uc>=0xC2 && uc<=0xF4) ||       // UTF-8 multibyte sequence's start byte
+                        (uc>=0x80 && uc<=0xBF) )    // UTF-8 consecutive  bytes
+                    logtraffic(term->logctx, (unsigned char) c, LGTYP_ASCII);
+            }
         }
 
         /* Note only VT220+ are 8-bit VT102 is seven bit, it shouldn't even
